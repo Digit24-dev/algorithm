@@ -8,7 +8,7 @@ ___
 algorithm 연습을 위한 repository이며 C++ 와 python을 주로 사용합니다.
 ___
 
-브랜치가 C++과 python으로 구분되어 있습니다.
+#### 브랜치가 C++과 python으로 구분되어 있습니다.
 ___
 
  * **Python** [beginning]
