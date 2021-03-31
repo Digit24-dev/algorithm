@@ -12,7 +12,6 @@ int a[MAX + 1][MAX + 1];
 bool visited[MAX + 1][MAX + 1];
 int cnt = 0;
 
-
 int dx[4] = { -1, 1, 0, 0 };
 int dy[4] = { 0, 0, -1, 1 };
 
