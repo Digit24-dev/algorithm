@@ -1,65 +1,72 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 using namespace std;
 
 char map[200][200];
 queue<pair<int,int> > bomb_q;
 
-void scan_boom(int c, int r);
+void scan_boom();
 void scan_set(int c, int r);
 void boom(int c, int r);
+void queue_bomb(int c, int r);
+void show_map(int r, int c);
 
 int main(){
 	
-	cin.tie();
+	cout.tie();
 	
 	int r, c, n;
 	int cnt = 0;
-	cin >> r >> c >> n;
 	
+	scanf("%d %d %d", &r, &c, &n);
+	//cin >> r >> c >> n;
+	
+	/*
 	for(int i=0; i<r; ++i){
 		for(int j=0; j<c; ++j){
-			cin >> map[j][i];
+			cin >> map[i][j];
 		}
 	}
+	*/
+	for(int i=0; i<r; ++i){
+		scanf("%s", map[i]);
+	}
 	
-	while(--n){
-		switch(cnt % 3){
+	--n;
+	
+	while(n--){
+		switch(cnt & 0x01){
 			case 0:
-				
-				break;
-			case 1:
+				queue_bomb(c, r);
 				scan_set(c, r);
 				break;
-			case 2:
-				scan_boom(c, r);
-				break;
+			case 1:
+				scan_boom();
+				break;				
 			default:
 				break;
 		}
 		++cnt;
 	}
-	
-	cout << endl;
-	
-	for(int i=0; i<r; ++i){
-		for(int j=0; j<c; ++j){
-			cout << map[j][i];
-		}
-		cout << endl;
-	}
-	
-	cout << endl;
+	show_map(r, c);
 	
 	return 0;
 }
 
+void show_map(int r, int c){
+	for(int i=0; i<r; ++i){
+		//puts(map[i]);
+		for(int j=0; j<c; ++j){
+			cout << map[i][j];
+		}
+		cout << "\n";
+	}
+}
+
 void queue_bomb(int c, int r){
-	
 	for(int i=0; i<r; ++i){
 		for(int j=0; j<c; ++j){
-			if(map[j][i] == '0')
+			if(map[i][j] == 'O')
 				bomb_q.push(make_pair(i,j)); 
 		}
 	}
@@ -68,14 +75,18 @@ void queue_bomb(int c, int r){
 void scan_set(int c, int r){
 	for(int i=0; i<r; ++i){
 		for(int j=0; j<c; ++j){
-			if(map[j][i] == '.')
-				map[j][i] = '0';
+			if(map[i][j] == '.')
+				map[i][j] = 'O';
 		}
 	}
 }
 
 void scan_boom(){
-	
+	while(!bomb_q.empty()){
+		pair<int,int> temp = bomb_q.front();
+		bomb_q.pop();
+		boom(temp.first, temp.second);
+	}
 }
 
 void boom(int c, int r){
