@@ -1,2 +1,5 @@
-
-Youtube_Chat_Crawling/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
