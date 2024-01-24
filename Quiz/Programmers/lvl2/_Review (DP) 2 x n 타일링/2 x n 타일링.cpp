@@ -6,6 +6,25 @@
 using namespace std;
 
 int solution(int n) {
+    std::vector<int> dp(n + 1, 0);
+
+    // 기저 사례: 0을 만들 수 있는 경우는 1가지 (아무것도 선택하지 않는 경우)
+    dp[0] = 1;
+
+    // 1부터 n까지의 숫자에 대해 경우의 수를 계산
+    for (int i = 1; i <= n; ++i) {
+        if (i >= 1) {
+            dp[i] = (dp[i] + dp[i - 1]) % 1000000007;
+        }
+        if (i >= 2) {
+            dp[i] = (dp[i] + dp[i - 2]) % 1000000007;
+        }
+    }
+
+    return dp[n];
+}
+
+int solution2(int n) {
     if (n == 0) {
         return 1;
     }
