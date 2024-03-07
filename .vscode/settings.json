@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "vector": "cpp",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "algorithm": "cpp"
   }
 }
